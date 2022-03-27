@@ -1,1 +1,0 @@
-cmd_/home/admin123/Desktop/BTL/kernel/kernel.ko := ld -r  -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/admin123/Desktop/BTL/kernel/kernel.ko /home/admin123/Desktop/BTL/kernel/kernel.o /home/admin123/Desktop/BTL/kernel/kernel.mod.o;  true
