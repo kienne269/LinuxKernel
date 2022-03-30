@@ -6,10 +6,13 @@
                 "${workspaceFolder}/**",
                 "/usr/include",
                 "/usr/local/include",
-                // "/usr/src/linux-headers-5.13.0-37/include",
-                "/usr/src/linux-headers-5.13.0-37-generic"
-                // "/usr/src/linux-headers-5.13.0-37/arch/x86/include",
-                // "/usr/lib/gcc/x86_64-linux-gnu/7.4.0/include"
+                "/usr/src/linux-headers-5.13.0-37-generic",
+                "/usr/src/linux-hwe-5.13-headers-5.13.0-37/include",
+                "/usr/src/linux-hwe-5.13-headers-5.13.0-37/arch/alpha/include",
+                "/usr/src/linux-hwe-5.13-headers-5.13.0-37/arch/arm64/include",
+                "/usr/src/linux-hwe-5.13-headers-5.13.0-37/arch/alpha/include/uapi",
+                "/usr/src/linux-headers-5.13.0-37-generic/arch/x86/include/generated",
+                "/usr/src/linux-headers-5.13.0-37-generic/include"
             ],
             "defines": [
                 "__GNUC__",
@@ -18,7 +21,11 @@
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++14",
-            "intelliSenseMode": "clang-x64"
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "mergeConfigurations": false
         }
     ],
     "version": 4
