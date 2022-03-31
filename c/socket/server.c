@@ -15,58 +15,12 @@
 #define PORTNUM 2001    // port to listen to
 #define MAX_CLIENT_NUM 2    // maximum number of clients allowed to connect
 
-#define DIRNAME "./fileToRead"  // directory to read files 
-
 int errorCheck(int retval, const char * message){
     if(retval == -1){
 		perror(message);  
 		exit(EXIT_FAILURE); 
 	}
     return retval;
-}
-
-// function to list file name in DIRNAME directory
-int listFile(int fd){
-    char fileName[30] = "";
-    struct dirent *dir;
-    DIR *dp;
-    dp = opendir(DIRNAME);
-    if(dp){
-        while(dir = readdir(dp)){
-            if (dir->d_type == 8){
-                printf("%s\n", dir->d_name);
-                printf(fileName, "%s\n", dir->d_name);
-                send(fd, fileName, strlen(fileName)+1, 0);
-                memset(fileName, 0, 30);
-            }
-        }
-        closedir(dp);
-    }
-}
-
-// function to read file and send file content to client
-int readFile(int fd, const char * fileName){
-    char file_buf[BUFFER_SIZE] = "";
-    FILE *file = fopen(fileName, "r");
-    size_t nread;
-
-    char data[BUFFER_SIZE] = {0};
-    if (file){
-        printf(data, "----------- BEGIN FILE READ -----------\n");
-        send(fd, data, sizeof(data), 0);
-        while(!feof(file)) {
-            if (fgets(data, BUFFER_SIZE, file)!=NULL ){
-                send(fd, data, sizeof(data), 0);
-                memset(data, 0, BUFFER_SIZE);
-            }
-        }
-        // send last line
-        strcat(data, "\n------------ END FILE READ ------------\n"); 
-        send(fd, data, sizeof(data), 0);
-    } else {
-        printf(data, "Server: Cannot open file\n");
-        send(fd, data, sizeof(data), 0);
-    }
 }
 
 
@@ -160,18 +114,7 @@ int main(){
                         FD_CLR(i, &masterSet); // remove from master set
                     } else {
                         // check client's command
-                        if (strncmp("/listf", buffer, 6) == 0 ){
-                            // list file
-                            printf("List file to client\n");
-                            listFile(i);
-                        }
-                        else if (strncmp("/readf", buffer, 6) == 0){
-                            //read file
-                            char fileName[50] = DIRNAME "/";
-                            strncat(fileName, &buffer[7], strlen(&buffer[7])-1);
-                            readFile(i, fileName);
-                        } 
-                        else if (strncmp("/close", buffer, 6) == 0){
+                        if (strncmp("/close", buffer, 6) == 0){
                             // close connection
                             printf("INFO: client at fd %d closed\n", i);
                             close(i); // close fd
