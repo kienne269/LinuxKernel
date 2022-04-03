@@ -13,7 +13,7 @@
 #define BUFFER_SIZE 1024
 
 #define PORTNUM 2001    // port to listen to
-#define MAX_CLIENT_NUM 2    // maximum number of clients allowed to connect
+#define MAX_CLIENT_NUM 3    // maximum number of clients allowed to connect
 
 int errorCheck(int retval, const char * message){
     if(retval == -1){
